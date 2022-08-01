@@ -1,0 +1,81 @@
+[
+    {
+        "email_address": "rama@gmail.com",
+        "password": "123456",
+        "first_name": "rama",
+        "last_name": "fadi",
+        "date_of_birth": "20-09-2020",
+        "phone_number": "055-1234567",
+        "role": "doctor",
+        "is_active": true,
+        "is_verified": true,
+        "created_at": "2021-10-10 12:00:15"
+
+    },
+
+    {
+        "email_address": "raneem@gmail.com",
+        "password": "123456",
+        "first_name": "raneem",
+        "last_name": "doe",
+        "date_of_birth": "20-09-2020",
+        "phone_number": "055-1234567",
+        "role": "doctor",
+        "is_active": true,
+        "is_verified": true,
+        "created_at": "2021-10-11 12:00:15"
+    },
+
+    {
+        "email_address": "ronaldo@gmail.com",
+        "password": "123456",
+        "first_name": "ronaldo",
+        "last_name": "doe",
+        "date_of_birth": "20-09-2020",
+        "phone_number": "055-1234567",
+        "role": "doctor",
+        "is_active": true,
+        "is_verified": true,
+        "created_at": "2021-10-11 12:00:15"
+    },
+
+    {
+        "email_address": "patrik@gmail.com",
+        "password": "123456",
+        "first_name": "patrik",
+        "last_name": "doe",
+        "date_of_birth": "20-09-2020",
+        "phone_number": "055-1234567",
+        "role": "patient",
+        "is_active": true,
+        "is_verified": true,
+        "created_at": "2021-10-11 12:00:15"
+    },
+
+    {
+        "email_address": "prashant@gmail.com",
+        "password": "123456",
+        "first_name": "prashant",
+        "last_name": "doe",
+        "date_of_birth": "20-09-2020",
+        "phone_number": "055-1234567",
+        "role": "patient",
+        "is_active": true,
+        "is_verified": true,
+        "created_at": "2021-10-11 12:00:15"
+    },
+
+    {
+        "email_address": "amanda@gmail.com",
+        "password": "123456",
+        "first_name": "amanda",
+        "last_name": "doe",
+        "date_of_birth": "20-09-2020",
+        "phone_number": "055-1234567",
+        "role": "clinic_admin",
+        "is_active": true,
+        "is_verified": true,
+        "created_at": "2021-10-11 12:00:15"
+    }
+
+]

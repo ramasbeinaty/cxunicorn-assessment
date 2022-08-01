@@ -1,0 +1,18 @@
+[
+    {
+        "work_shift": "Morning Shift",
+        "unavailable_days": null
+    },
+    {
+        "work_shift": "Night Shift",
+        "unavailable_days": null
+    },
+    {
+        "work_shift": "Night Shift",
+        "unavailable_days": null
+    },
+    {
+        "work_shift": "Morning Shift",
+        "unavailable_days": null
+    }
+]

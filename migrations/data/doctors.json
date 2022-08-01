@@ -1,0 +1,16 @@
+[
+    {
+        "specialization": "Cardiology",
+        "is_role": "doctor"
+    },
+
+    {
+        "specialization":"Pediatrician",
+        "is_role": "doctor"
+    },
+
+    {
+        "specialization":"Neurology",
+        "is_role": "doctor"
+    }
+]

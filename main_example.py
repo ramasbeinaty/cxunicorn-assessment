@@ -1,6 +1,6 @@
 from typing import List
 from uuid import UUID, uuid1
-from models import User, Gender, Role
+from models_example import User, Gender, Role
 
 from fastapi import FastAPI, HTTPException
 
