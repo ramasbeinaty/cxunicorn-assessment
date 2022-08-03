@@ -1,13 +1,17 @@
 from datetime import datetime
-from .staff import StaffBase, Staff, StaffCreate
+from .staff import StaffBase, Staff, StaffCreate, StaffFields
 from ..schemas.enums import Role
 
 from typing import List
 
-# below is used when both retrieving and creating doctor data
-class DoctorBase(StaffBase):
+# required class fields without the inherited fields
+class DoctorFields(StaffFields):
     specialization: str
 
+
+# below is used when both retrieving and creating doctor data
+class DoctorBase(StaffBase, DoctorFields):
+    ...
 
 class DoctorCreate(StaffCreate, DoctorBase):
     # role: int = Role.doctor.value
@@ -19,7 +23,7 @@ class DoctorCreate(StaffCreate, DoctorBase):
 class Doctor(Staff, DoctorBase):
     id: int
 
-    # appointments_rel: List[Appointment] = []
+    # booked_appointments: List[Appointment] = []
 
     class Config:
         orm_mode = True

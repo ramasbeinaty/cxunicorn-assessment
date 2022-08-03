@@ -16,8 +16,8 @@ class ClinicAdmin(Staff):
     # id = Column(Integer, primary_key=True, index=True)
     id = Column(Integer, ForeignKey(str(settings.staff_table_name+".id")), primary_key=True, index=True)
 
-    __mapper_args__ = {
-        "polymorphic_identity": "clinic_admin",
-    }
+    # __mapper_args__ = {
+    #     "polymorphic_identity": "clinic_admin",
+    # }
 
     # profile = relationship("User", back_populates="profile")

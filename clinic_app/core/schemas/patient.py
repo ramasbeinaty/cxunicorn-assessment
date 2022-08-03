@@ -1,11 +1,17 @@
 from typing import List
 
+from pydantic import BaseModel
+
 from .user import UserBase, User, UserCreate
 from .enums import Role
 
-# below is used when both retrieving and creating user data
-class PatientBase(UserBase):
+# required class fields without the inherited fields
+class PatientFields(BaseModel):
     medical_history: str
+
+# below is used when both retrieving and creating user data
+class PatientBase(UserBase, PatientFields):
+    ...
 
 
 # below includes the data needed when creating a doctor

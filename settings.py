@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     # endpoint prefixes
     api_endpoint: str = "/api"
+    auth_endpoint: str = "/auth"
     doctors_endpoint: str = "/" + doctors_str
     patients_endpoint: str = "/" + patients_str
     

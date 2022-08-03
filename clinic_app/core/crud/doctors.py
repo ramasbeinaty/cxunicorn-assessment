@@ -1,4 +1,3 @@
-from requests import session
 from sqlalchemy.orm import Session
 
 from ..models.doctor import Doctor
@@ -17,8 +16,8 @@ def create_doctor(db: Session, doctor: DoctorCreate):
     db_doctor = Doctor( specialization=doctor.specialization.lower(),
                         work_shift=doctor.work_shift,
                         unavailable_days=doctor.unavailable_days,
-                        password=doctor.password,
                         email_address=doctor.email_address.lower(), 
+                        password=doctor.password,
                         first_name = doctor.first_name.lower(),
                         last_name=doctor.last_name.lower(),
                         date_of_birth=doctor.date_of_birth.lower(),

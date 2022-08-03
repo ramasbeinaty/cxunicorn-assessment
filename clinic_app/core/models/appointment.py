@@ -19,7 +19,7 @@ class Appointment(Event):
     # create a relationship with patients table
     # patient=relationship(settings.patients_table_name, back_populates="appointments")
 
-    # create a relationship with doctors table
+    #create a relationship with doctors table
     # doctor_rel=relationship("Doctor", uselist=False, back_populates='appointments_rel')
 
     # patient = relationship(settings.patients_table_name, back_populates="patient")

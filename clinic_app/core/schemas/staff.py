@@ -2,10 +2,14 @@ from datetime import datetime
 from pydantic import BaseModel
 from .user import UserBase, User, UserCreate
 
-# below is used when both retrieving and creating user data
-class StaffBase(UserBase):
+# required class fields without the inherited fields
+class StaffFields(BaseModel):
     work_shift: str
     unavailable_days: datetime
+
+# below is used when both retrieving and creating user data
+class StaffBase(UserBase, StaffFields):
+    ...
 
 
 # below includes the data needed when creating a doctor
