@@ -1,4 +1,3 @@
-from clinic_app.api.endpoints import appointments
 from .enums import Role
 
 from ..db.db_setup import Base, SessionLocal
@@ -47,7 +46,8 @@ class Patient(User):
     medical_history = Column(String, nullable=False)
 
     # create a relationship with appointments table
-    # patient_appointments=relationship("Appointment", backref="Appointment.id", primaryjoin="Patient.id==Appointment.patient_id")
+    # appointments=relationship("Appointment", backref="Appointment.id", primaryjoin="Patient.id==Appointment.patient_id")
+    appointments=relationship("Appointment", back_populates="patient")
 
 
 class ClinicAdmin(Staff):
@@ -61,7 +61,8 @@ class Doctor(Staff):
     specialization = Column(String, nullable=False)
 
     # create a relationship with appointments table
-    doctors_appointments=relationship("Appointment", backref="Appointment.id", primaryjoin="Doctor.id==Appointment.doctor_id")
+    # appointments=relationship("Appointment", backref="Appointment.id", primaryjoin="Doctor.id==Appointment.doctor_id")
+    appointments=relationship("Appointment", back_populates="doctor")
     
 
 class Event(Timestamp, Base):
@@ -70,7 +71,7 @@ class Event(Timestamp, Base):
     id = Column(Integer, primary_key=True, index=True)
 
     created_by_user_id = Column(Integer, nullable=False)
-
+    
     # created_by = relationship(User)
     event_date = Column(DateTime, default=datetime.utcnow(), nullable=False)
     event_duration_in_minutes = Column(Float, nullable=False)
@@ -83,11 +84,15 @@ class Appointment(Event):
 
     id = Column(Integer, ForeignKey(settings.events_table_name+".id"), primary_key=True, index=True)
 
-    doctor_id = Column(Integer, ForeignKey(Doctor.id), primary_key=True)
-    # patient_id = Column(Integer, ForeignKey(Patient.id), primary_key=True)
+    # doctor_id = Column(Integer, ForeignKey(Doctor.id), primary_key=True)
+    doctor_id = Column(Integer, ForeignKey(settings.doctors_table_name+".id"), primary_key=True)
+    # patient_id = Column(Integer, ForeignKey((settings.patients_table_name).id), primary_key=True)
+    patient_id = Column(Integer, ForeignKey(settings.patients_table_name+".id"), primary_key=True)
 
     #create a relationship with doctors table
-    doctor=relationship("Doctor", foreign_keys="Appointment.doctor_id")
+    # doctor=relationship("Doctor", foreign_keys="Appointment.doctor_id")
+    doctor=relationship("Doctor", back_populates=settings.appointments_table_name)
 
     # create a relationship with patients table
     # patient=relationship("Patient", foreign_keys="Appointment.patient_id")
+    patient=relationship("Patient", back_populates=settings.appointments_table_name)

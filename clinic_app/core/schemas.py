@@ -195,8 +195,3 @@ class Appointment(Event, AppointmentBase):
 
     class Config:
         orm_mode = True
-
-class AppointmentWithDoctorAndPatientInfo(Appointment):
-    doctor_name: str
-    doctor_specialization: str
-    patient_name: str
