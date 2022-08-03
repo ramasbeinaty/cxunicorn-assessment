@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from ..models.doctor import Doctor
-from ..schemas.doctor import DoctorCreate
+from ..models import Doctor
+from ..schemas import DoctorCreate
 
 def get_all_doctors(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Doctor).offset(skip).limit(limit).all()

@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 from typing import Optional, List
 
 from ...db.db_setup import get_db
-from ...core.schemas.doctor import Doctor, DoctorCreate
+from clinic_app.core.schemas import Doctor, DoctorCreate
 
-from ...core.crud.doctors import get_all_doctors, get_doctor, get_doctor_by_email,  create_doctor
+from ...core.crud.doctors_crud import get_all_doctors, get_doctor, get_doctor_by_email,  create_doctor
 
 router = APIRouter()
 

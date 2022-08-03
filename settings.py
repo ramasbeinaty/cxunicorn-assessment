@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     auth_endpoint: str = "/auth"
     doctors_endpoint: str = "/" + doctors_str
     patients_endpoint: str = "/" + patients_str
+    appointments_endpoint: str = "/" + appointments_str
     
     # database tables
     doctors_table_name = doctors_str

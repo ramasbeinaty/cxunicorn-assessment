@@ -1,18 +1,14 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from clinic_app.core.schemas.clinic_admin import ClinicAdminFields
-from clinic_app.core.schemas.doctor import DoctorFields
-from clinic_app.core.schemas.patient import PatientFields
+from clinic_app.core.schemas import ClinicAdminFields, DoctorFields, PatientFields, UserCreate
 
-from clinic_app.core.schemas.user import UserCreate
+from ..schemas import Role
 
-from ..schemas.enums import Role
+from ..models import User as user_model
 
-from ..models.user import User as user_model
-
-from ..models.clinic_admin import ClinicAdmin
-from ..models.doctor import Doctor
-from ..models.patient import Patient
+from ..models import ClinicAdmin
+from ..models import Doctor
+from ..models import Patient
 
 def get_user_by_email(db:Session, user_email: int):
     return db.query(user_model).filter(user_model.email_address == user_email).first()
