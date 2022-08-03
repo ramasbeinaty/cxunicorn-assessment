@@ -1,10 +1,10 @@
 [
     {
         "medical_history": "Had a hernia surgery",
-        "is_role": "patient"
+        "is_role": 3
     },
     {
         "medical_history": "allergic to nuts and strawberries",
-        "is_role": "patient"
+        "is_role": 3
     }
 ]

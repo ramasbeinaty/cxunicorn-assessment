@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     clinic_admins_str: str = "clinic_admins"
     users_str: str = "users"
     staff_str: str = "staffs"
+    events_str: str = "events"
+    appointments_str: str = "appointments"
 
     # endpoint prefixes
     api_endpoint: str = "/api"
@@ -20,6 +22,8 @@ class Settings(BaseSettings):
     users_table_name = users_str
     clinic_admins_table_name = clinic_admins_str
     staff_table_name = staff_str
+    events_table_name = events_str
+    appointments_table_name = appointments_str
 
 
     

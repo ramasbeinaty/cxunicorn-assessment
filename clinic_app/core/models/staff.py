@@ -1,7 +1,8 @@
 from typing import Optional
-from pydantic import BaseModel
 
 from .user import User
+
+from ...db.db_setup import Base, SessionLocal
 
 from ..schemas.enums import Role
 
@@ -16,7 +17,7 @@ class Staff(User):
     
     id = Column(Integer, ForeignKey(str(settings.users_table_name+".id")), primary_key=True, index=True)
     work_shift = Column(String, default="Morning Shift", nullable=False) # TODO: implement a morning and night shift system
-    unavailable_days = Column(DateTime, default=None) # TODO: implement with shift system
+    unavailable_days = Column(DateTime, default=None) # TODO: implement with shift system and change to list of Dates
 
     __mapper_args__ = {
         "polymorphic_identity": "staff",

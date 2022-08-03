@@ -1,10 +1,6 @@
-from email.policy import default
-from typing import Optional
-from pydantic import BaseModel
-
 from ..schemas.enums import Role
 
-from ...db.db_setup import Base
+from ...db.db_setup import Base, SessionLocal
 
 from settings import settings
 

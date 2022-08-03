@@ -1,16 +1,16 @@
 [
     {
         "specialization": "Cardiology",
-        "is_role": "doctor"
+        "is_role": 2
     },
 
     {
         "specialization":"Pediatrician",
-        "is_role": "doctor"
+        "is_role": 2
     },
 
     {
         "specialization":"Neurology",
-        "is_role": "doctor"
+        "is_role": 2
     }
 ]

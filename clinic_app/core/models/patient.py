@@ -15,6 +15,8 @@ class Patient(User):
     id = Column(Integer, ForeignKey(str(settings.users_table_name+".id")), primary_key=True, index=True)
     medical_history = Column(String, nullable=False)
 
-    __mapper_args__ = {
-        "polymorphic_identity": "patient",
-    }
+    # appointments=relationship(settings.appointments_table_name, back_populates="patient")
+
+    # __mapper_args__ = {
+    #     "polymorphic_identity": "patient",
+    # }

@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from clinic_app.db.db_setup import Base
-from clinic_app.core.models import user, doctor, patient, clinic_admin
+from clinic_app.core.models import user, doctor, patient, clinic_admin, appointment, event
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
