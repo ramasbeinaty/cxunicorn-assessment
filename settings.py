@@ -27,9 +27,13 @@ class Settings(BaseSettings):
     events_table_name = events_str
     appointments_table_name = appointments_str
 
-
+    # JWT Configuration
+    SECRET_KEY = "ramasbeinaty"
+    ALGORITHM = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES = 15
     
     class Config:
         env_file = ".env"
 
+    
 settings = Settings()

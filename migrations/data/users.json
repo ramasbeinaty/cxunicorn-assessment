@@ -1,7 +1,7 @@
 [
     {
         "email_address": "rama@gmail.com",
-        "password": "123456",
+        "password": "$2b$12$rjnflO0x07whkU0z5g.yHOuq1L4hVnQNMYBd.2tkPMFAI2ASqU6Sm",
         "first_name": "rama",
         "last_name": "fadi",
         "date_of_birth": "20-09-2020",
@@ -15,7 +15,7 @@
 
     {
         "email_address": "raneem@gmail.com",
-        "password": "123456",
+        "password": "$2b$12$rjnflO0x07whkU0z5g.yHOuq1L4hVnQNMYBd.2tkPMFAI2ASqU6Sm",
         "first_name": "raneem",
         "last_name": "doe",
         "date_of_birth": "20-09-2020",
@@ -28,7 +28,7 @@
 
     {
         "email_address": "ronaldo@gmail.com",
-        "password": "123456",
+        "password": "$2b$12$rjnflO0x07whkU0z5g.yHOuq1L4hVnQNMYBd.2tkPMFAI2ASqU6Sm",
         "first_name": "ronaldo",
         "last_name": "doe",
         "date_of_birth": "20-09-2020",
@@ -41,7 +41,7 @@
 
     {
         "email_address": "patrik@gmail.com",
-        "password": "123456",
+        "password": "$2b$12$rjnflO0x07whkU0z5g.yHOuq1L4hVnQNMYBd.2tkPMFAI2ASqU6Sm",
         "first_name": "patrik",
         "last_name": "doe",
         "date_of_birth": "20-09-2020",
@@ -54,7 +54,7 @@
 
     {
         "email_address": "prashant@gmail.com",
-        "password": "123456",
+        "password": "$2b$12$rjnflO0x07whkU0z5g.yHOuq1L4hVnQNMYBd.2tkPMFAI2ASqU6Sm",
         "first_name": "prashant",
         "last_name": "doe",
         "date_of_birth": "20-09-2020",
@@ -67,7 +67,7 @@
 
     {
         "email_address": "amanda@gmail.com",
-        "password": "123456",
+        "password": "$2b$12$rjnflO0x07whkU0z5g.yHOuq1L4hVnQNMYBd.2tkPMFAI2ASqU6Sm",
         "first_name": "amanda",
         "last_name": "doe",
         "date_of_birth": "20-09-2020",

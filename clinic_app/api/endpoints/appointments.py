@@ -14,15 +14,6 @@ import json
 
 router = APIRouter()
 
-appointments_response_format = r'''"id":{id},
-        "created_by_user_id":{created_by_user_id},
-        "event_date":{event_date},
-        "event_duration_in_minutes":{event_duration_in_minutes},
-        "doctor_id":{doctor_id},
-        "doctor_name":{doctor_name}, 
-        "patient_id":{patient_id},
-        "patient_name":{patient_name}
-    '''
 
 @router.get("/", response_model=List[Appointment], status_code=status.HTTP_200_OK)
 def read_all_appointments(skip: int=0, limit: int = 10, patient_id: int | None = None, db: Session = Depends(get_db)):
@@ -33,35 +24,16 @@ def read_all_appointments(skip: int=0, limit: int = 10, patient_id: int | None =
 
     return db_appointment
 
-@router.get("/{appointment_id}")
+
+@router.get("/{appointment_id}", response_model=Appointment)
 async def read_appointment(appointment_id: int, db: Session = Depends(get_db)):
     db_appointment = get_appointment(db=db, appointment_id=appointment_id)
     
     if not db_appointment:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"No appointment with id {appointment_id} exists.")
 
-    # app = appointments_response_format.format(id=db_appointment.id, 
-    #                                             created_by_user_id=db_appointment.created_by_user_id,
-    #                                             event_date=db_appointment.event_date,
-    #                                             event_duration_in_minutes=db_appointment.event_duration_in_minutes,
-    #                                             doctor_id=db_appointment.doctor_id,
-    #                                             doctor_name=db_appointment.doctor.first_name+db_appointment.doctor.last_name, 
-    #                                             patient_id=db_appointment.patient_id,
-    #                                             patient_name=db_appointment.patient.first_name+db_appointment.patient.last_name
-    #                                             )
-    # app = str(r"{"+app+r"}")
-    # print("AAAAAAAAAAAAAAA: ", app)                                        
-    # app = json.loads(app)
-    return {
-        "id": db_appointment.id,
-        "created_by_user_id": db_appointment.created_by_user_id,
-        "event_date": db_appointment.event_date,
-        "event_duration_in_minutes": db_appointment.event_duration_in_minutes,
-        "doctor_id": db_appointment.doctor_id,
-        "doctor_name": db_appointment.doctor.first_name+db_appointment.doctor.last_name, 
-        "patient_id": db_appointment.patient_id,
-        "patient_name": db_appointment.patient.first_name+db_appointment.patient.last_name
-    }
+    return db_appointment
+    
 
 @router.post("/", response_model=Appointment, status_code=status.HTTP_201_CREATED)
 def create_new_appointment(appointment: AppointmentCreate, db: Session = Depends(get_db)):
