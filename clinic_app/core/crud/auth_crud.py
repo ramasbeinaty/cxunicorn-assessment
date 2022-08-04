@@ -7,6 +7,7 @@ from ..schemas import User as UserSchema
 
 from ..schemas import HTTPResponseSchema, Role, TokenResponse
 from ..models import User, ClinicAdmin, Doctor, Patient
+import email_validator
 
 from ..utils import auth_handler
 
@@ -16,10 +17,21 @@ def get_user_by_email(db:Session, email_address: str):
 
 
 def register_user(db: Session, user_info: UserCreate, role_info: DoctorFields| PatientFields| ClinicAdminFields| None = None):
+    # check if email is already registered in system
     db_user = get_user_by_email(db=db, email_address=user_info.email_address)
     if db_user:
          raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered in system.")
 
+    print("registering users")
+
+    # validate email
+    try:
+        email_validator.validate_email(email=user_info.email_address)
+        
+    except email_validator.EmailNotValidError:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email address is invalid.")
+
+    # hash given password and create user according to role
     try:
         hashed_password = auth_handler.get_hashed_password(user_info.password)
 
@@ -81,9 +93,9 @@ def login_user(db: Session, email_address: str, password: str):
         if not auth_handler.verify_password(password, db_user.password):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password entered is incorrect.")
 
-        user_schema_obj = UserSchema.from_orm(db_user)
+        schema_user = UserSchema.from_orm(db_user)
 
-        token = auth_handler.encode_token(data={user_schema_obj.email_address, user_schema_obj.role})
+        token = auth_handler.encode_token(user_principal=schema_user.email_address, user_role=schema_user.role)
         
         return HTTPResponseSchema(status_code=status.HTTP_200_OK, message="Logged in successfully.", result=TokenResponse(access_token=token, token_type="Bearer")).dict(exclude_none=True)
 

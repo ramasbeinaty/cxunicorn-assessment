@@ -18,7 +18,6 @@ class UserBase(BaseModel):
 class UserBaseDetails(UserBase):
     date_of_birth: str # TODO: change to datetime object
     phone_number: str # TODO: have validation
-    created_at: datetime
 
 
 # below includes the data needed when creating a user
@@ -44,7 +43,8 @@ class User(UserBase):
 
 # retrieve user details that shouldn't be shown except to authorized users
 class UserDetails(User, UserBaseDetails):
-    ...
+    created_at: datetime
+
 
 """
     PATIENT SCHEMA

@@ -26,7 +26,7 @@ def get_hashed_password(password):
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
-def encode_token(data, expire_timedelta: Optional[timedelta]=None):
+def encode_token(user_principal, user_role, expire_timedelta: Optional[timedelta]=None):
 
     if expire_timedelta:
         expire = datetime.utcnow() + expire_timedelta
@@ -34,19 +34,20 @@ def encode_token(data, expire_timedelta: Optional[timedelta]=None):
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
     payload = {
-        "exp": str(expire),
-        "lat": str(datetime.utcnow()),
-        "sub": str(data)
+        "exp": expire,
+        "lat": datetime.utcnow().timestamp(),
+        "sub": user_principal,
+        "role": user_role
     }
 
-    encoded_jwt = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(payload, key=SECRET_KEY, algorithm=ALGORITHM)
 
     return encoded_jwt
 
 def decode_token(token: str):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithm=[ALGORITHM])
-        return payload if payload["exp"] >= datetime.time() else None
+        payload = jwt.decode(token, key=SECRET_KEY, algorithms=ALGORITHM)
+        return payload if payload["exp"] >= datetime.utcnow().timestamp() else None
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token signature expired.")
     except jwt.InvalidTokenError:

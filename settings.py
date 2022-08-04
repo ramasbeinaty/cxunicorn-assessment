@@ -11,10 +11,11 @@ class Settings(BaseSettings):
     staff_str: str = "staffs"
     events_str: str = "events"
     appointments_str: str = "appointments"
+    auth_str: str = "auth"
 
     # endpoint prefixes
     api_endpoint: str = "/api"
-    auth_endpoint: str = "/auth"
+    auth_endpoint: str = "/" + auth_str
     doctors_endpoint: str = "/" + doctors_str
     patients_endpoint: str = "/" + patients_str
     appointments_endpoint: str = "/" + appointments_str

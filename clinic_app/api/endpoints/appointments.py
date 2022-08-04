@@ -1,6 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import Optional, List
+from clinic_app.core.crud.patient_crud import get_patient
+
+from clinic_app.core.utils.auth_handler import auth_wrapper
+from clinic_app.core.utils.role_handler import is_patient
 
 from ...db.db_setup import get_db
 from clinic_app.core.schemas import Appointment, AppointmentCreate
@@ -11,7 +15,7 @@ from ...core.crud.doctors_crud import get_doctor
 
 import json
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(auth_wrapper)])
 
 
 @router.get("/", response_model=List[Appointment], status_code=status.HTTP_200_OK)
@@ -34,7 +38,7 @@ async def read_appointment(appointment_id: int, db: Session = Depends(get_db)):
     return db_appointment
     
 
-@router.post("/", response_model=Appointment, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=Appointment, status_code=status.HTTP_201_CREATED, dependencies=[Depends(is_patient)])
 def create_new_appointment(appointment: AppointmentCreate, db: Session = Depends(get_db)):
     db_doctor = get_doctor(db=db, doctor_id=appointment.doctor_id)
     db_patient = get_patient(db=db, patient_id=appointment.patient_id)
