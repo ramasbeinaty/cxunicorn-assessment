@@ -19,8 +19,3 @@ async def read_all_patient_appointments(patient_id: int, skip: int=0, limit: int
 
 
     return db_patient
-
-@router.get("/", response_model=List[Doctor])
-def read_all_doctors(skip: int=0, limit: int = 10, db: Session = Depends(get_db)):
-    doctors = get_all_doctors(db, skip=skip, limit=limit)
-    return doctors

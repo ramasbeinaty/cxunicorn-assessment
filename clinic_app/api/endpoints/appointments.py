@@ -8,7 +8,6 @@ from clinic_app.core.schemas import Appointment, AppointmentCreate
 from ...core.crud.appointments_crud import cancel_appointment, create_appointment, get_all_appointments, get_appointment, get_all_appointments_of_patient
 
 from ...core.crud.doctors_crud import get_doctor
-from ...core.crud.patient_crud import get_patient
 
 import json
 

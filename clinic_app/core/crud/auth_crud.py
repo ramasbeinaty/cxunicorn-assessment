@@ -83,7 +83,7 @@ def login_user(db: Session, email_address: str, password: str):
 
         user_schema_obj = UserSchema.from_orm(db_user)
 
-        token = auth_handler.encode_token(data=user_schema_obj.email_address)
+        token = auth_handler.encode_token(data={user_schema_obj.email_address, user_schema_obj.role})
         
         return HTTPResponseSchema(status_code=status.HTTP_200_OK, message="Logged in successfully.", result=TokenResponse(access_token=token, token_type="Bearer")).dict(exclude_none=True)
 

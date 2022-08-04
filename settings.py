@@ -1,4 +1,5 @@
 from pydantic import BaseSettings
+from decouple import config
 
 class Settings(BaseSettings):
     app_name: str = "Clinic API"
@@ -28,12 +29,9 @@ class Settings(BaseSettings):
     appointments_table_name = appointments_str
 
     # JWT Configuration
-    SECRET_KEY = "ramasbeinaty"
-    ALGORITHM = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES = 15
-    
-    class Config:
-        env_file = ".env"
+    SECRET_KEY = config("SECRET_KEY")
+    ALGORITHM = config("ALGORITHM")
+    ACCESS_TOKEN_EXPIRE_MINUTES = int(config("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
     
 settings = Settings()

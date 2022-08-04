@@ -36,12 +36,8 @@ def encode_token(data, expire_timedelta: Optional[timedelta]=None):
     payload = {
         "exp": str(expire),
         "lat": str(datetime.utcnow()),
-        "sub": data
+        "sub": str(data)
     }
-
-    # payload = json.dumps(payload)
-
-    # print(payload)
 
     encoded_jwt = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
