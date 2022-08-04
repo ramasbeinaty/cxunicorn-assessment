@@ -9,7 +9,7 @@ from clinic_app.core.utils.role_handler import is_patient
 from ...db.db_setup import get_db
 from clinic_app.core.schemas import Appointment, AppointmentCreate
 
-from ...core.crud.appointments_crud import cancel_appointment, create_appointment, get_all_appointments, get_appointment, get_all_appointments_of_patient
+from ...core.crud.appointments_crud import cancel_appointment, create_appointment, get_all_appointments, get_appointment, get_all_appointments_by_patient
 
 from ...core.crud.doctors_crud import get_doctor
 
@@ -21,7 +21,7 @@ router = APIRouter(dependencies=[Depends(auth_wrapper)])
 @router.get("/", response_model=List[Appointment], status_code=status.HTTP_200_OK)
 def read_all_appointments(skip: int=0, limit: int = 10, patient_id: int | None = None, db: Session = Depends(get_db)):
     if patient_id:
-        db_appointment = get_all_appointments_of_patient(db=db, patient_id=patient_id, skip=skip, limit=limit)
+        db_appointment = get_all_appointments_by_patient(db=db, patient_id=patient_id, skip=skip, limit=limit)
     else: 
         db_appointment = get_all_appointments(db=db, skip=skip, limit=limit)
 

@@ -8,9 +8,9 @@ from .mixins import Timestamp
 
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Enum, Float, DateTime
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Enum, Float, DateTime, PickleType
 from sqlalchemy.orm import relationship
-
+from sqlalchemy.ext.mutable import MutableList
 
 
 class User(Timestamp, Base):
@@ -35,9 +35,9 @@ class Staff(User):
     __tablename__ = settings.staff_table_name
     
     id = Column(Integer, ForeignKey(str(settings.users_table_name+".id")), primary_key=True, index=True)
-    work_shift = Column(String, default="Morning Shift", nullable=False) # TODO: implement a morning and night shift system
-    unavailable_days = Column(DateTime, default=None) # TODO: implement with shift system and change to list of Dates
-
+    work_shift = Column(String, default="morning_shift", nullable=False) 
+    # unavailable_days = Column(DateTime, default=None) # TODO: implement with shift system and change to list of Dates
+    # unavailable_datetimes = Column(MutableList.as_mutable(PickleType), default=[])
 
 class Patient(User):
     __tablename__ = settings.patients_table_name
@@ -46,7 +46,6 @@ class Patient(User):
     medical_history = Column(String, nullable=False)
 
     # create a relationship with appointments table
-    # appointments=relationship("Appointment", backref="Appointment.id", primaryjoin="Patient.id==Appointment.patient_id")
     appointments=relationship("Appointment", back_populates="patient")
 
 
@@ -61,7 +60,6 @@ class Doctor(Staff):
     specialization = Column(String, nullable=False)
 
     # create a relationship with appointments table
-    # appointments=relationship("Appointment", backref="Appointment.id", primaryjoin="Doctor.id==Appointment.doctor_id")
     appointments=relationship("Appointment", back_populates="doctor")
     
 
@@ -71,10 +69,9 @@ class Event(Timestamp, Base):
     id = Column(Integer, primary_key=True, index=True)
 
     created_by_user_id = Column(Integer, nullable=False)
-    
-    # created_by = relationship(User)
-    event_date = Column(DateTime, default=datetime.utcnow(), nullable=False)
-    event_duration_in_minutes = Column(Float, nullable=False)
+
+    event_start_datetime = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    event_end_datetime = Column(DateTime, nullable=False)
 
     is_canceled = Column(Boolean, default=False)
 
@@ -83,16 +80,11 @@ class Appointment(Event):
     __tablename__ = settings.appointments_table_name
 
     id = Column(Integer, ForeignKey(settings.events_table_name+".id"), primary_key=True, index=True)
-
-    # doctor_id = Column(Integer, ForeignKey(Doctor.id), primary_key=True)
     doctor_id = Column(Integer, ForeignKey(settings.doctors_table_name+".id"), primary_key=True)
-    # patient_id = Column(Integer, ForeignKey((settings.patients_table_name).id), primary_key=True)
     patient_id = Column(Integer, ForeignKey(settings.patients_table_name+".id"), primary_key=True)
 
     #create a relationship with doctors table
-    # doctor=relationship("Doctor", foreign_keys="Appointment.doctor_id")
     doctor=relationship("Doctor", back_populates=settings.appointments_table_name)
 
     # create a relationship with patients table
-    # patient=relationship("Patient", foreign_keys="Appointment.patient_id")
     patient=relationship("Patient", back_populates=settings.appointments_table_name)

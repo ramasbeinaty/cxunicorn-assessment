@@ -38,7 +38,6 @@ def register_user(db: Session, user_info: UserCreate, role_info: DoctorFields| P
         if user_info.role == Role.clinic_admin:
             db_user = ClinicAdmin(
                                     work_shift = role_info.work_shift,
-                                    unavailable_days = role_info.unavailable_days,
                                     email_address=user_info.email_address.lower(), 
                                     password=hashed_password,
                                     first_name = user_info.first_name.lower(),
@@ -51,7 +50,6 @@ def register_user(db: Session, user_info: UserCreate, role_info: DoctorFields| P
             db_user = Doctor(
                                 specialization=role_info.specialization.lower(),
                                 work_shift=role_info.work_shift,
-                                unavailable_days=role_info.unavailable_days,
                                 email_address=user_info.email_address.lower(), 
                                 password=hashed_password,
                                 first_name = user_info.first_name.lower(),

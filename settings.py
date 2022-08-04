@@ -29,6 +29,12 @@ class Settings(BaseSettings):
     events_table_name = events_str
     appointments_table_name = appointments_str
 
+    # Doctor Appointments Rules
+    doctor_max_appointments_per_day = 12
+    doctor_max_total_appointments_minutes_per_day = 480
+    min_appointment_duration_in_minutes = 15
+    max_appointment_duration_in_minutes = 120
+
     # JWT Configuration
     SECRET_KEY = config("SECRET_KEY")
     ALGORITHM = config("ALGORITHM")

@@ -22,8 +22,8 @@ def upgrade() -> None:
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_by_user_id', sa.Integer(), nullable=False),
-    sa.Column('event_date', sa.DateTime(), nullable=False),
-    sa.Column('event_duration_in_minutes', sa.Float(), nullable=False),
+    sa.Column('event_start_datetime', sa.DateTime(), nullable=False),
+    sa.Column('event_end_datetime', sa.DateTime(), nullable=False),
     sa.Column('is_canceled', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )

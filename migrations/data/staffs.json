@@ -1,18 +1,14 @@
 [
     {
-        "work_shift": "Morning Shift",
-        "unavailable_days": "10-10-2022"
+        "work_shift": "morning_shift"
     },
     {
-        "work_shift": "Night Shift",
-        "unavailable_days": "10-10-2022"
+        "work_shift": "night_shift"
     },
     {
-        "work_shift": "Night Shift",
-        "unavailable_days": "10-10-2022"
+        "work_shift": "morning_shift"
     },
     {
-        "work_shift": "Morning Shift",
-        "unavailable_days": "10-10-2022"
+        "work_shift": "morning_shift"
     }
 ]
