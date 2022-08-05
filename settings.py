@@ -4,6 +4,8 @@ from decouple import config
 class Settings(BaseSettings):
     app_name: str = "Clinic API"
 
+    date_format: str = "%d-%m-%Y"
+
     doctors_str: str = "doctors"
     patients_str: str = "patients"
     clinic_admins_str: str = "clinic_admins"

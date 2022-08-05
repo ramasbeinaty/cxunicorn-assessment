@@ -1,16 +1,12 @@
 from .enums import Role
-
-from ..db.db_setup import Base, SessionLocal
-
+from ..db.db_setup import Base
 from settings import settings
-
 from .mixins import Timestamp
 
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Enum, Float, DateTime, PickleType
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Enum, DateTime
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.mutable import MutableList
 
 
 class User(Timestamp, Base):
@@ -36,8 +32,7 @@ class Staff(User):
     
     id = Column(Integer, ForeignKey(str(settings.users_table_name+".id")), primary_key=True, index=True)
     work_shift = Column(String, default="morning_shift", nullable=False) 
-    # unavailable_days = Column(DateTime, default=None) # TODO: implement with shift system and change to list of Dates
-    # unavailable_datetimes = Column(MutableList.as_mutable(PickleType), default=[])
+
 
 class Patient(User):
     __tablename__ = settings.patients_table_name

@@ -1,19 +1,18 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import Optional, List
+from typing import List
+
 from clinic_app.core.crud.patient_crud import get_patient
-
 from clinic_app.core.utils.auth_handler import auth_wrapper
-from clinic_app.core.utils.role_handler import is_patient
-
-from ...db.db_setup import get_db
+from clinic_app.core.utils.role_handler import is_clinic_admin, is_doctor_or_clinic_admin, is_patient
 from clinic_app.core.schemas import Appointment, AppointmentCreate
-
-from ...core.crud.appointments_crud import cancel_appointment, create_appointment, get_all_appointments, get_appointment, get_all_appointments_by_patient
-
+from ...db.db_setup import get_db
+from ...core.crud.appointments_crud import cancel_appointment, create_appointment, get_all_appointments, get_appointment, get_all_appointments_by_patient, get_doctors_with_more_than_six_hours_of_appointments_in_a_day, get_doctors_with_most_appointments_in_a_day
 from ...core.crud.doctors_crud import get_doctor
 
-import json
+from datetime import datetime
+
+from settings import settings
 
 router = APIRouter(dependencies=[Depends(auth_wrapper)])
 
@@ -30,6 +29,7 @@ def read_all_appointments(skip: int=0, limit: int = 10, patient_id: int | None =
 
 @router.get("/{appointment_id}", response_model=Appointment)
 async def read_appointment(appointment_id: int, db: Session = Depends(get_db)):
+    print("im in the wrong")
     db_appointment = get_appointment(db=db, appointment_id=appointment_id)
     
     if not db_appointment:
@@ -52,7 +52,7 @@ def create_new_appointment(appointment: AppointmentCreate, db: Session = Depends
     appointment = create_appointment(db=db, appointment=appointment)
     return appointment
 
-@router.patch("/{appointment_id}", status_code=status.HTTP_200_OK)
+@router.patch("/{appointment_id}", status_code=status.HTTP_200_OK, dependencies=[Depends(is_doctor_or_clinic_admin)])
 def cancel_given_appointment(appointment_id: int, db: Session = Depends(get_db)):
     db_appointment = get_appointment(db=db, appointment_id=appointment_id)
 
@@ -62,3 +62,15 @@ def cancel_given_appointment(appointment_id: int, db: Session = Depends(get_db))
     db_cancel_appointment = cancel_appointment(db=db, appointment=db_appointment)
 
     return db_cancel_appointment
+
+@router.get("/by_day/{day}", dependencies=[Depends(is_clinic_admin)])
+def read_doctors_appointments_by_day(day: str, most: bool=False, above_six: bool=False, db: Session=Depends(get_db)):
+    parsed_day = datetime.strptime(day, settings.date_format)
+
+    if most:
+        db_doctors = get_doctors_with_most_appointments_in_a_day(db=db, day=parsed_day)
+
+    if above_six:
+        db_doctors = get_doctors_with_more_than_six_hours_of_appointments_in_a_day(db=db, day=parsed_day)
+
+    return db_doctors

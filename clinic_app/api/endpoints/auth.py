@@ -21,7 +21,3 @@ async def create_new_user(user_info: UserCreate, role_info: DoctorFields| Patien
 @router.post("/login", status_code=status.HTTP_200_OK)
 def sign_in_user(email_address: str, password: str, db: Session = Depends(get_db)):
     return login_user(db=db, email_address=email_address, password=password)
-
-@router.get("/protected")
-def checking_protection(username=Depends(auth_handler.auth_wrapper)):
-    return {{"username": username}}

@@ -83,3 +83,27 @@ def doctor_can_accept_appointment(new_appointment: AppointmentSchema, current_db
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Doctor cannot have more than {settings.doctor_max_total_appointments_minutes_per_day} minutes of total appointments time in a day.")
     
     return True
+
+def get_total_appointments_by_doctor(db_appointments: List[Appointment]):
+    """
+        loops through given appointments and returns a dict indicating total appointments each doctor id registered has.
+
+        sample dict = {
+            doctor_id: total_appointments
+        }
+    """
+    # convert db appointment models list to schemas
+    schema_appointments = parse_obj_as(List[AppointmentSchema], db_appointments)
+
+    data = {}
+
+    for appointment in schema_appointments:
+        doctor_id = appointment.doctor_id
+
+        if not data.get(doctor_id):
+            data[str(doctor_id)]=1
+        else:
+            data[str(doctor_id)]+=1
+    
+    return data
+        

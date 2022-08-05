@@ -57,7 +57,6 @@ def upgrade() -> None:
     staffs = op.create_table('staffs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('work_shift', sa.String(), nullable=False),
-    sa.Column('unavailable_days', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

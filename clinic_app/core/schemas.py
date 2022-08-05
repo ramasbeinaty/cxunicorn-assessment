@@ -85,7 +85,6 @@ class PatientDetails(UserDetails, Patient):
 # required class fields without the inherited fields
 class StaffFields(BaseModel):
     work_shift: str
-    unavailable_datetimes: list
 
 # below is used when both retrieving and creating user data
 class StaffBase(UserBase, StaffFields):

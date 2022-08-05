@@ -1,7 +1,5 @@
 from sqlalchemy.orm import Session
 
-from clinic_app.core.crud.appointments_crud import get_all_future_appointments_by_doctor
-
 from ..models import Appointment, Doctor
 from ..schemas import DoctorCreate
 
@@ -32,12 +30,3 @@ def create_doctor(db: Session, doctor: DoctorCreate):
     db.commit()
     db.refresh(db_doctor)
     return db_doctor
-
-def get_available_doctor_slots(db: Session, doctor_id: int):
-    future_appointments = get_all_future_appointments_by_doctor(db=db, doctor_id=doctor_id)
-
-    
-
-    return future_appointments
-
-
