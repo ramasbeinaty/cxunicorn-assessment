@@ -38,6 +38,13 @@ On MacOS / Linux:
 source cxunicorn/bin/activate
 ```
 
+__Note__ - To deactivate the virtual environment, use the following command:
+```commandline
+ deactivate
+ ```
+
+<br>
+
 ### 2. Install requirements
 ```commandline
 pip install -r ./requirements.txt
@@ -48,7 +55,7 @@ pip install -r ./requirements.txt
 alembic upgrade head
 ```
 
-To undo migrations
+__Note__ - To undo migrations, use the following command:
 ```commandline
 alembic downgrade base
 ```
@@ -56,7 +63,7 @@ alembic downgrade base
 <br>
 
 ## Run Project
-__Note__: once migration is performed, a set of pre-defined users will be inserted into the db.
+__Note__ - once migration is performed, a set of pre-defined users will be inserted into the db.
 ```commandline
 uvicorn main:app --reload
 ```
