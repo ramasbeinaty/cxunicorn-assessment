@@ -49,6 +49,7 @@ pip install -r ./requirements.txt
 
 ### 3. Setup database
 a) Create a local postgres database
+
 b) Open `clinic_app/db/db_setup.py` and `alembic.ini` and change the constants `SQLALCHEMY_DATABASE_URL` and `sqlalchemy.url`, respectively, to reflect the local database created
 
 `SQLALCHEMY Database URL Format is "postgresql://{username}:{password}@localhost:5432/{database_name}"`
