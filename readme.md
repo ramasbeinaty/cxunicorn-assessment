@@ -95,7 +95,7 @@ To access it, visit Postman and import the following link -
 |/doctors/:doctorId/slots|View Doctors available slots|**|N|
 |/appointments|Book an appointment with a doctor|Patient only|Y|
 |/appointments/:appointmentId|Cancel appointment|Doctor & clinic admin|Y|
-|* |View availability of allDoctors|**|N|
+|* |View availability of all Doctors|**|N|
 |/appointments/:appointmentId|View appointment details|All|Y|
 |/appointments/?:patientId|View patient appointment history|All|Y|
 |/appointments/by_day/:day/?most=True|View doctors with the most appointments in a given day|Clinic admin only|Y|
