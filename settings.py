@@ -1,10 +1,11 @@
 from pydantic import BaseSettings
 from decouple import config
 
+
 class Settings(BaseSettings):
     app_name: str = "Clinic API"
 
-    date_format: str = "%d-%m-%Y"
+    date_format: str = "%Y-%m-%d"
 
     doctors_str: str = "doctors"
     patients_str: str = "patients"
@@ -21,7 +22,7 @@ class Settings(BaseSettings):
     doctors_endpoint: str = "/" + doctors_str
     patients_endpoint: str = "/" + patients_str
     appointments_endpoint: str = "/" + appointments_str
-    
+
     # database tables
     doctors_table_name = doctors_str
     patients_table_name = patients_str
@@ -42,5 +43,5 @@ class Settings(BaseSettings):
     ALGORITHM = config("ALGORITHM")
     ACCESS_TOKEN_EXPIRE_MINUTES = int(config("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
-    
+
 settings = Settings()

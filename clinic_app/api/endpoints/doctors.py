@@ -11,10 +11,12 @@ from ...core.crud.doctors_crud import get_all_doctors, get_doctor
 
 router = APIRouter(dependencies=[Depends(auth_wrapper)])
 
+
 @router.get("/", response_model=List[Doctor])
 def read_all_doctors(skip: int=0, limit: int = 10, db: Session = Depends(get_db)):
     doctors = get_all_doctors(db=db, skip=skip, limit=limit)
     return doctors
+
 
 @router.get("/{doctor_id}", response_model=Doctor)
 async def read_doctor(doctor_id: int, db: Session = Depends(get_db)):

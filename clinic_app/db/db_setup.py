@@ -11,6 +11,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, futu
 
 Base = declarative_base()
 
+
 # DB UTILS
 def get_db():
     db = SessionLocal()
