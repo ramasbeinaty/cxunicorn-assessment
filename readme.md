@@ -69,7 +69,7 @@ alembic downgrade base
 <br>
 
 ## Run Project
-__Note__ - once migration is performed, a set of pre-defined users will be inserted into the db.
+__Note__ - once migrations are performed, a set of pre-defined users will be inserted into the db.
 ```commandline
 uvicorn main:app --reload
 ```
